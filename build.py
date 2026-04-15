@@ -572,19 +572,20 @@ body::-webkit-scrollbar {{ display: none; }}
   object-fit: cover;
 }}
 
-/* Solution 02 product 2x2 */
+/* Solution 02 product 3x2 */
 .sol2-products {{
-  width: 480px; height: 456px;
+  width: 100%;
   display: grid;
-  grid-template-columns: 234px 234px;
-  grid-template-rows: 220px 220px;
-  gap: 12px;
-  margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  gap: 14px;
+  aspect-ratio: 3 / 2;
+  max-height: 600px;
 }}
 .sol2-products .ph {{
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 12px 20px -1px rgba(0,0,0,0.3);
+  box-shadow: 0 12px 24px -2px rgba(0,0,0,0.25);
   background: white;
 }}
 .sol2-products .ph img {{
@@ -852,7 +853,9 @@ body::-webkit-scrollbar {{ display: none; }}
         <div class="sol2-products">
           <div class="ph"><img src="{IMG['sol2_sojuicy']}" alt=""></div>
           <div class="ph"><img src="{IMG['sol2_rockon']}" alt=""></div>
+          <div class="ph"><img src="{IMG['brand_3_eyeshadow']}" alt=""></div>
           <div class="ph"><img src="{IMG['sol2_freshkiss']}" alt=""></div>
+          <div class="ph"><img src="{IMG['brand_5_skinjuice']}" alt=""></div>
           <div class="ph"><img src="{IMG['sol2_goldenstate']}" alt=""></div>
         </div>
       </div>
