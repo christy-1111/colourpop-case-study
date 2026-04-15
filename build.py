@@ -500,20 +500,20 @@ body::-webkit-scrollbar {{ display: none; }}
 .sol-grid {{
   position: absolute;
   left: 0; top: 0; right: 0; bottom: 0;
-  padding: 80px 160px 80px 259px;
+  padding: 80px 120px 80px 140px;
   display: grid;
-  grid-template-columns: 635px minmax(0, 1.2fr);
-  gap: 80px;
+  grid-template-columns: 620px minmax(0, 1fr);
+  gap: 60px;
   align-items: center;
 }}
 .sol-grid.reverse {{
-  padding: 80px 80px 80px 160px;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  padding: 80px 140px 80px 120px;
+  grid-template-columns: minmax(0, 1fr) 620px;
 }}
 .sol-grid.s4 {{
-  padding: 80px 80px 80px 235px;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: 120px;
+  padding: 80px 140px 80px 120px;
+  grid-template-columns: minmax(0, 1fr) 620px;
+  gap: 80px;
 }}
 .sol-text {{
   display: flex; flex-direction: column; gap: 40px; align-items: flex-start;
@@ -543,8 +543,8 @@ body::-webkit-scrollbar {{ display: none; }}
 .sol-desc.dark {{ color: rgba(255,255,255,0.55); }}
 .sol-desc.light {{ color: rgba(0,0,0,0.56); }}
 .sol-visual {{
-  max-height: 450px;
   display: flex; align-items: center; justify-content: center;
+  max-height: 100%;
 }}
 .sol-visual .frame {{
   width: 100%;
