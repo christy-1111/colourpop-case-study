@@ -127,7 +127,7 @@ body::-webkit-scrollbar {{ display: none; }}
 
 .stage {{
   width: 1920px;
-  height: 1200px;
+  height: 1080px;
   position: relative;
   transform-origin: center center;
   transform: scale(var(--stage-scale));
@@ -336,10 +336,11 @@ body::-webkit-scrollbar {{ display: none; }}
 /* ================= SLIDE 2 — BRAND ================= */
 .s-brand .brand-container {{
   position: absolute;
-  left: 303px; top: 164px;
-  width: 1313px; height: 795px;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 1313px;
   display: flex; flex-direction: column; align-items: center;
-  gap: 72px;
+  gap: 50px;
 }}
 .brand-heading {{
   display: flex; flex-direction: column; align-items: center; gap: 32px;
@@ -383,10 +384,10 @@ body::-webkit-scrollbar {{ display: none; }}
 /* ================= SLIDE 3 — IMPACT ================= */
 .s-impact .impact-container {{
   position: absolute;
-  left: 345px; top: 310px;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
   display: flex; flex-direction: column;
-  gap: 154px;
-  height: 454px;
+  gap: 120px;
   align-items: center;
 }}
 .impact-heading-block {{
@@ -652,7 +653,7 @@ body::-webkit-scrollbar {{ display: none; }}
 }}
 .cta-qr {{
   position: absolute;
-  left: 1641px; top: 968px;
+  right: 80px; bottom: 80px;
   display: flex; flex-direction: column; align-items: center; gap: 16px;
 }}
 .cta-qr .qr-frame {{
@@ -941,7 +942,7 @@ body::-webkit-scrollbar {{ display: none; }}
   // Stage scaling — fit 1920x1200 inside viewport while preserving aspect
   function updateScale() {{
     const sx = window.innerWidth / 1920;
-    const sy = window.innerHeight / 1200;
+    const sy = window.innerHeight / 1080;
     const scale = Math.min(sx, sy);
     document.documentElement.style.setProperty('--stage-scale', scale);
   }}
