@@ -193,26 +193,41 @@ body::-webkit-scrollbar {{ display: none; }}
 }}
 .reveal-scale {{
   opacity: 0; transform: scale(0.95);
-  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
-              transform 0.8s cubic-bezier(0.16,1,0.3,1);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+              transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}}
+.reveal-left {{
+  opacity: 0; transform: translateX(-50px);
+  transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1),
+              transform 0.85s cubic-bezier(0.16,1,0.3,1);
+}}
+.reveal-right {{
+  opacity: 0; transform: translateX(50px);
+  transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1),
+              transform 0.85s cubic-bezier(0.16,1,0.3,1);
+}}
+.reveal-blur {{
+  opacity: 0; filter: blur(20px); transform: scale(1.04);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
+              filter 0.9s cubic-bezier(0.16,1,0.3,1),
+              transform 0.9s cubic-bezier(0.16,1,0.3,1);
 }}
 .slide.visible .reveal,
-.slide.visible .reveal-scale {{
+.slide.visible .reveal-scale,
+.slide.visible .reveal-left,
+.slide.visible .reveal-right,
+.slide.visible .reveal-blur {{
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translate(0,0) scale(1);
+  filter: blur(0);
 }}
-.slide.visible .reveal[data-d="1"],
-.slide.visible .reveal-scale[data-d="1"] {{ transition-delay: 0.05s; }}
-.slide.visible .reveal[data-d="2"],
-.slide.visible .reveal-scale[data-d="2"] {{ transition-delay: 0.15s; }}
-.slide.visible .reveal[data-d="3"],
-.slide.visible .reveal-scale[data-d="3"] {{ transition-delay: 0.25s; }}
-.slide.visible .reveal[data-d="4"],
-.slide.visible .reveal-scale[data-d="4"] {{ transition-delay: 0.35s; }}
-.slide.visible .reveal[data-d="5"],
-.slide.visible .reveal-scale[data-d="5"] {{ transition-delay: 0.45s; }}
-.slide.visible .reveal[data-d="6"],
-.slide.visible .reveal-scale[data-d="6"] {{ transition-delay: 0.55s; }}
+.slide.visible [data-d="1"] {{ transition-delay: 0.08s; }}
+.slide.visible [data-d="2"] {{ transition-delay: 0.18s; }}
+.slide.visible [data-d="3"] {{ transition-delay: 0.30s; }}
+.slide.visible [data-d="4"] {{ transition-delay: 0.42s; }}
+.slide.visible [data-d="5"] {{ transition-delay: 0.54s; }}
+.slide.visible [data-d="6"] {{ transition-delay: 0.66s; }}
+.slide.visible [data-d="7"] {{ transition-delay: 0.78s; }}
 
 /* ===== Chrome: progress bar, dots, keyboard hint ===== */
 .progress {{
@@ -572,25 +587,106 @@ body::-webkit-scrollbar {{ display: none; }}
   object-fit: cover;
 }}
 
-/* Solution 02 product 3x2 */
+/* Solution 02 — product targeting UI cards */
 .sol2-products {{
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr 1fr;
   gap: 14px;
-  aspect-ratio: 3 / 2;
-  max-height: 600px;
+  aspect-ratio: 1.45 / 1;
+  max-height: 720px;
 }}
-.sol2-products .ph {{
-  border-radius: 16px;
+.product-card {{
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 12px 24px -2px rgba(0,0,0,0.25);
-  background: white;
+  box-shadow: 0 12px 28px -4px rgba(0,0,0,0.08);
+  display: flex; flex-direction: column;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }}
-.sol2-products .ph img {{
+.product-card:hover {{
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -4px rgba(0,0,0,0.14);
+}}
+.product-card.hero {{
+  border: 1.5px solid #2997FF;
+  box-shadow: 0 18px 40px -4px rgba(41,151,255,0.22);
+}}
+.product-card .pc-img {{
+  width: 100%;
+  flex: 1.2;
+  overflow: hidden;
+  background: #f3f3f5;
+  position: relative;
+}}
+.product-card .pc-img img {{
   width: 100%; height: 100%;
   object-fit: cover; display: block;
+}}
+.product-card .pc-badge {{
+  position: absolute;
+  top: 10px; left: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #22D3EE, #3583E9);
+  color: white;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(53,131,233,0.35);
+}}
+.product-card .pc-meta {{
+  padding: 14px 16px 16px;
+  display: flex; flex-direction: column; gap: 6px;
+  background: white;
+}}
+.product-card .pc-name {{
+  font-size: 15px; font-weight: 600;
+  color: #1D1D1F;
+  letter-spacing: -0.01em;
+}}
+.product-card .pc-stats {{
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px;
+  color: rgba(0,0,0,0.55);
+}}
+.product-card .pc-stats .stat {{
+  display: flex; align-items: center; gap: 4px;
+}}
+.product-card .pc-stats .gmv {{
+  color: #2997FF; font-weight: 600;
+}}
+.product-card .pc-stats .dot {{
+  width: 3px; height: 3px; border-radius: 50%;
+  background: rgba(0,0,0,0.25);
+}}
+.product-card .pc-pill {{
+  align-self: flex-start;
+  margin-top: 2px;
+  padding: 3px 9px;
+  background: #EEF6FF;
+  color: #2563EB;
+  font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 999px;
+}}
+.product-card .pc-pill.live {{
+  background: #ECFDF5;
+  color: #059669;
+}}
+.product-card .pc-pill.live::before {{
+  content: "";
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #10B981;
+  margin-right: 5px;
+  vertical-align: middle;
+  box-shadow: 0 0 6px rgba(16,185,129,0.6);
 }}
 
 /* ================= SLIDE 7 — CTA ================= */
@@ -693,7 +789,7 @@ body::-webkit-scrollbar {{ display: none; }}
     {nav("dark")}
     <div class="hero-stack">
       <div class="hero-logos-block">
-        <div class="hero-logos reveal-scale" data-d="1">
+        <div class="hero-logos reveal-blur" data-d="1">
           <div class="hero-logo-tile"><img src="{IMG['logo_cp']}" alt="ColourPop"></div>
           <span class="x">×</span>
           <div class="hero-logo-tile r"><img src="{IMG['logo_r']}" alt="Reacher"></div>
@@ -705,7 +801,7 @@ body::-webkit-scrollbar {{ display: none; }}
         </div>
       </div>
       <div class="hero-headline-block">
-        <h1 class="reveal" data-d="3">
+        <h1 class="reveal-blur" data-d="3">
           <em class="grad-blue">463K creators</em> reached in under 3 months.
         </h1>
         <div class="pill reveal" data-d="4">
@@ -778,7 +874,7 @@ body::-webkit-scrollbar {{ display: none; }}
     {nav("dark")}
     <div class="problem-container">
       <div class="problem-eyebrow reveal" data-d="1">Before Reacher</div>
-      <div class="problem-headline reveal" data-d="2">
+      <div class="problem-headline reveal-blur" data-d="2">
         Paying an agency.
         <em class="grad-blue-alt">Getting nothing back.</em>
       </div>
@@ -831,13 +927,13 @@ body::-webkit-scrollbar {{ display: none; }}
     {nav("dark")}
     <div class="sol-grid">
       <div class="sol-text">
-        <div class="sol-eyebrow reveal" data-d="1">Solution 01</div>
+        <div class="sol-eyebrow reveal-left" data-d="1">Solution 01</div>
         <div class="sol-text-inner">
-          <div class="sol-title dark reveal" data-d="2">Real-Time Dashboard</div>
-          <div class="sol-desc dark reveal" data-d="3">Every outreach, sample request, and approval visible as it happens. No more guessing.</div>
+          <div class="sol-title dark reveal-left" data-d="2">Real-Time Dashboard</div>
+          <div class="sol-desc dark reveal-left" data-d="3">Every outreach, sample request, and approval visible as it happens. No more guessing.</div>
         </div>
       </div>
-      <div class="sol-visual dark reveal-scale" data-d="3">
+      <div class="sol-visual dark reveal-right" data-d="2">
         <div class="frame"><img src="{IMG['sol1_dash']}" alt="Real-Time Dashboard"></div>
       </div>
     </div>
@@ -849,21 +945,88 @@ body::-webkit-scrollbar {{ display: none; }}
   <div class="stage">
     {nav("light")}
     <div class="sol-grid reverse">
-      <div class="sol-visual reveal-scale" data-d="1">
+      <div class="sol-visual reveal-left" data-d="1">
         <div class="sol2-products">
-          <div class="ph"><img src="{IMG['sol2_sojuicy']}" alt=""></div>
-          <div class="ph"><img src="{IMG['sol2_rockon']}" alt=""></div>
-          <div class="ph"><img src="{IMG['brand_3_eyeshadow']}" alt=""></div>
-          <div class="ph"><img src="{IMG['sol2_freshkiss']}" alt=""></div>
-          <div class="ph"><img src="{IMG['brand_5_skinjuice']}" alt=""></div>
-          <div class="ph"><img src="{IMG['sol2_goldenstate']}" alt=""></div>
+          <div class="product-card hero">
+            <span class="pc-badge">Hero · Shadow Stix</span>
+            <div class="pc-img"><img src="{IMG['brand_3_eyeshadow']}" alt=""></div>
+            <div class="pc-meta">
+              <div class="pc-name">Shadow Stix Eyeshadow</div>
+              <div class="pc-stats">
+                <span class="stat gmv">$350K</span>
+                <span class="dot"></span>
+                <span class="stat">1,100+ videos</span>
+              </div>
+              <span class="pc-pill live">Targeting · L3+</span>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="pc-img"><img src="{IMG['sol2_sojuicy']}" alt=""></div>
+            <div class="pc-meta">
+              <div class="pc-name">So Juicy Lip</div>
+              <div class="pc-stats">
+                <span class="stat gmv">$58K</span>
+                <span class="dot"></span>
+                <span class="stat">320 videos</span>
+              </div>
+              <span class="pc-pill live">Targeting · L2+</span>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="pc-img"><img src="{IMG['sol2_rockon']}" alt=""></div>
+            <div class="pc-meta">
+              <div class="pc-name">Rock On Palette</div>
+              <div class="pc-stats">
+                <span class="stat gmv">$42K</span>
+                <span class="dot"></span>
+                <span class="stat">280 videos</span>
+              </div>
+              <span class="pc-pill">Targeting · L3+</span>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="pc-img"><img src="{IMG['sol2_freshkiss']}" alt=""></div>
+            <div class="pc-meta">
+              <div class="pc-name">Fresh Kiss Lip</div>
+              <div class="pc-stats">
+                <span class="stat gmv">$35K</span>
+                <span class="dot"></span>
+                <span class="stat">240 videos</span>
+              </div>
+              <span class="pc-pill">Targeting · L2+</span>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="pc-img"><img src="{IMG['brand_5_skinjuice']}" alt=""></div>
+            <div class="pc-meta">
+              <div class="pc-name">Skin Juice Tint</div>
+              <div class="pc-stats">
+                <span class="stat gmv">$26K</span>
+                <span class="dot"></span>
+                <span class="stat">190 videos</span>
+              </div>
+              <span class="pc-pill live">Targeting · All</span>
+            </div>
+          </div>
+          <div class="product-card">
+            <div class="pc-img"><img src="{IMG['sol2_goldenstate']}" alt=""></div>
+            <div class="pc-meta">
+              <div class="pc-name">Golden State Palette</div>
+              <div class="pc-stats">
+                <span class="stat gmv">$52K</span>
+                <span class="dot"></span>
+                <span class="stat">350 videos</span>
+              </div>
+              <span class="pc-pill">Targeting · L3+</span>
+            </div>
+          </div>
         </div>
       </div>
       <div class="sol-text">
-        <div class="sol-eyebrow reveal" data-d="1">Solution 02</div>
+        <div class="sol-eyebrow reveal-right" data-d="2">Solution 02</div>
         <div class="sol-text-inner">
-          <div class="sol-title light reveal" data-d="2">Hero Product Targeting</div>
-          <div class="sol-desc light reveal" data-d="3">Strategic outreach by product ID. Shadow Stix alone drove $350K in affiliate GMV across 1,100+ videos.</div>
+          <div class="sol-title light reveal-right" data-d="3">Hero Product Targeting</div>
+          <div class="sol-desc light reveal-right" data-d="4">Strategic outreach by product ID. Shadow Stix alone drove $350K in affiliate GMV across 1,100+ videos.</div>
         </div>
       </div>
     </div>
@@ -876,13 +1039,13 @@ body::-webkit-scrollbar {{ display: none; }}
     {nav("dark")}
     <div class="sol-grid">
       <div class="sol-text">
-        <div class="sol-eyebrow reveal" data-d="1">Solution 03</div>
+        <div class="sol-eyebrow reveal-left" data-d="1">Solution 03</div>
         <div class="sol-text-inner">
-          <div class="sol-title dark reveal" data-d="2">Campaign Planning</div>
-          <div class="sol-desc dark reveal" data-d="3">Super Brand Day campaigns built, tracked, and reported weekly with custom-branded calendars and incentive strategy.</div>
+          <div class="sol-title dark reveal-left" data-d="2">Campaign Planning</div>
+          <div class="sol-desc dark reveal-left" data-d="3">Super Brand Day campaigns built, tracked, and reported weekly with custom-branded calendars and incentive strategy.</div>
         </div>
       </div>
-      <div class="sol-visual dark reveal-scale" data-d="3">
+      <div class="sol-visual dark reveal-right" data-d="2">
         <div class="frame"><img src="{IMG['sol3_campaign']}" alt="Campaign planning UI"></div>
       </div>
     </div>
@@ -894,14 +1057,14 @@ body::-webkit-scrollbar {{ display: none; }}
   <div class="stage">
     {nav("light")}
     <div class="sol-grid s4">
-      <div class="sol-visual light reveal-scale" data-d="1">
+      <div class="sol-visual light reveal-left" data-d="1">
         <div class="frame"><img src="{IMG['sol4_slack']}" alt="Slack conversation"></div>
       </div>
       <div class="sol-text">
-        <div class="sol-eyebrow reveal" data-d="1">Solution 04</div>
+        <div class="sol-eyebrow reveal-right" data-d="2">Solution 04</div>
         <div class="sol-text-inner">
-          <div class="sol-title light reveal" data-d="2">Same-Day Pivots</div>
-          <div class="sol-desc light reveal" data-d="3">One Slack message shifts product focus within hours. When tiers saturate, the team flags it and pivots together.</div>
+          <div class="sol-title light reveal-right" data-d="3">Same-Day Pivots</div>
+          <div class="sol-desc light reveal-right" data-d="4">One Slack message shifts product focus within hours. When tiers saturate, the team flags it and pivots together.</div>
         </div>
       </div>
     </div>
@@ -913,7 +1076,7 @@ body::-webkit-scrollbar {{ display: none; }}
   <div class="stage">
     {nav("dark")}
     <div class="cta-container">
-      <div class="cta-headline reveal" data-d="1">
+      <div class="cta-headline reveal-blur" data-d="1">
         Want your results <em class="grad-warm">like this?</em>
       </div>
       <div class="cta-buttons-block">
